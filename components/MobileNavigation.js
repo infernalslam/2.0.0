@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { animateScroll } from 'react-scroll'
 import PropTypes from 'prop-types'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
@@ -62,6 +63,10 @@ export default class MobileNavigation extends Component {
     this.handleToggleMobileNav(false)
   }
 
+  handleClickNavTop = (e) => {
+    animateScroll.scrollTo(0)
+  }
+
   renderNav = () => {
     const { navs } = this.props
     const { expandMobileNav } = this.state
@@ -72,7 +77,7 @@ export default class MobileNavigation extends Component {
           transitionName='fade'
           transitionEnterTimeout={300}
           transitionLeaveTimeout={300}>
-          { expandMobileNav && <div className='nav-header' key='nav-header'>React Bangkok</div> }
+          { expandMobileNav && <div className='nav-header' key='nav-header' onClick={this.handleClickNavTop}>React Bangkok</div> }
           { expandMobileNav && navs.map(nav =>
             <NavigationLink href={nav.href} key={nav.href} disabled={nav.disabled}>{nav.label}</NavigationLink>)
           }
@@ -86,6 +91,7 @@ export default class MobileNavigation extends Component {
             padding: .6em;
             color:#00D8FF;
             font-size: 30px;
+            cursor: pointer;
           }
         `}</style>
       </nav>
